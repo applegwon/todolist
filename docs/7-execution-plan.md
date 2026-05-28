@@ -188,22 +188,22 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** 카테고리 목록 조회/생성/수정/삭제 4개 엔드포인트를 구현한다.
 
 **완료 조건:**
-- [ ] `src/services/categoryService.js` 구현:
-  - [ ] `getCategoriesByUser(userId)`: 기본 카테고리(user_id=NULL) + 본인 카테고리 목록 반환
-  - [ ] `createCategory(userId, name)`: 이름 중복 확인 → DB 저장
-  - [ ] `updateCategory(userId, categoryId, name)`: 기본 카테고리 수정 거부 → 소유권 확인 → 이름 중복 확인 → 수정
-  - [ ] `deleteCategory(userId, categoryId)`: 기본 카테고리 삭제 거부 → 소유권 확인 → 소속 할일을 기본 카테고리로 이동 → 삭제
-- [ ] `src/controllers/categoryController.js`: 입력 검증 → 서비스 호출 → JSON 응답
-- [ ] `src/routes/categories.js`: 4개 라우트 정의, authMiddleware 적용
+- [x] `src/services/categoryService.js` 구현:
+  - [x] `getCategoriesByUser(userId)`: 기본 카테고리(user_id=NULL) + 본인 카테고리 목록 반환
+  - [x] `createCategory(userId, name)`: 이름 중복 확인 → DB 저장
+  - [x] `updateCategory(userId, categoryId, name)`: 기본 카테고리 수정 거부 → 소유권 확인 → 이름 중복 확인 → 수정
+  - [x] `deleteCategory(userId, categoryId)`: 기본 카테고리 삭제 거부 → 소유권 확인 → 소속 할일을 기본 카테고리로 이동 → 삭제
+- [x] `src/controllers/categoryController.js`: 입력 검증 → 서비스 호출 → JSON 응답
+- [x] `src/routes/categories.js`: 4개 라우트 정의, authMiddleware 적용
 
 **동작 검증:**
-- [ ] `GET /api/categories` → 200, 기본 카테고리 포함 목록 반환 (UC-301)
-- [ ] `POST /api/categories` 정상 → 201 반환 (UC-301)
-- [ ] `POST /api/categories` 이름 중복 → 409 반환 (UC-302)
-- [ ] `PATCH /api/categories/1` (기본 카테고리) → 403 반환 (UC-304)
-- [ ] `DELETE /api/categories/1` (기본 카테고리) → 403 반환 (UC-304)
-- [ ] `DELETE /api/categories/:id` 실행 후 소속 할일이 기본 카테고리(id=1)로 이동된다 (UC-306)
-- [ ] 타인 소유 카테고리 수정/삭제 → 403 반환 (UC-303, UC-305)
+- [x] `GET /api/categories` → 200, 기본 카테고리 포함 목록 반환 (UC-301)
+- [x] `POST /api/categories` 정상 → 201 반환 (UC-301)
+- [x] `POST /api/categories` 이름 중복 → 409 반환 (UC-302)
+- [x] `PATCH /api/categories/1` (기본 카테고리) → 403 반환 (UC-304)
+- [x] `DELETE /api/categories/1` (기본 카테고리) → 403 반환 (UC-304)
+- [x] `DELETE /api/categories/:id` 실행 후 소속 할일이 기본 카테고리(id=1)로 이동된다 (UC-306)
+- [x] 타인 소유 카테고리 수정/삭제 → 403 반환 (UC-303, UC-305)
 
 **의존성:**
 - [x] BE-04 완료
@@ -474,7 +474,7 @@ DB-01
 | BE-03: 인증 API | ✅ 완료 | 2026-05-28 |
 | BE-04: JWT 미들웨어 | ✅ 완료 | 2026-05-28 |
 | BE-05: 사용자 API | ✅ 완료 | 2026-05-28 |
-| BE-06: 카테고리 API | ⬜ 미시작 | — |
+| BE-06: 카테고리 API | ✅ 완료 | 2026-05-28 |
 | BE-07: 할일 API | ⬜ 미시작 | — |
 | FE-01: 프론트엔드 초기 설정 | ⬜ 미시작 | — |
 | FE-02: 공통 인프라 | ⬜ 미시작 | — |
