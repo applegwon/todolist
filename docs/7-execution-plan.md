@@ -122,21 +122,21 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** `POST /api/auth/signup`과 `POST /api/auth/login` 엔드포인트를 구현한다.
 
 **완료 조건:**
-- [ ] `src/app.js`: Express 앱 인스턴스 생성, CORS, JSON 파싱, 라우트 등록, 에러 핸들러 등록
-- [ ] `src/server.js`: 포트 바인딩 및 서버 시작
-- [ ] `src/services/authService.js`: `signup()`, `login()` 함수 구현
-  - [ ] signup: 이메일 중복 확인 → bcryptjs 해싱 → DB 저장 → 사용자 반환
-  - [ ] login: 이메일 조회 → bcryptjs 비교 → JWT 발급 → `{token, user}` 반환
-- [ ] `src/controllers/authController.js`: 입력 검증 → 서비스 호출 → JSON 응답
-- [ ] `src/routes/auth.js`: `POST /signup`, `POST /login` 라우팅 정의
-- [ ] `src/routes/index.js`: 모든 라우터를 `/api` 접두사로 마운트
+- [x] `src/app.js`: Express 앱 인스턴스 생성, CORS, JSON 파싱, 라우트 등록, 에러 핸들러 등록
+- [x] `src/server.js`: 포트 바인딩 및 서버 시작
+- [x] `src/services/authService.js`: `signup()`, `login()` 함수 구현
+  - [x] signup: 이메일 중복 확인 → bcryptjs 해싱 → DB 저장 → 사용자 반환
+  - [x] login: 이메일 조회 → bcryptjs 비교 → JWT 발급 → `{token, user}` 반환
+- [x] `src/controllers/authController.js`: 입력 검증 → 서비스 호출 → JSON 응답
+- [x] `src/routes/auth.js`: `POST /signup`, `POST /login` 라우팅 정의
+- [x] `src/routes/index.js`: 모든 라우터를 `/api` 접두사로 마운트
 
 **동작 검증:**
-- [ ] `POST /api/auth/signup` 정상 요청 → 201, `{id, email, name}` 반환
-- [ ] `POST /api/auth/signup` 이메일 중복 → 409, `{code: "EMAIL_DUPLICATE"}` 반환 (UC-102)
-- [ ] `POST /api/auth/login` 정상 요청 → 200, `{token, user: {id, email, name, theme, language}}` 반환
-- [ ] `POST /api/auth/login` 비밀번호 불일치 → 401 반환
-- [ ] DB에 비밀번호가 해시로 저장되고 원문이 없다 (NFR-201)
+- [x] `POST /api/auth/signup` 정상 요청 → 201, `{id, email, name}` 반환
+- [x] `POST /api/auth/signup` 이메일 중복 → 409, `{code: "EMAIL_DUPLICATE"}` 반환 (UC-102)
+- [x] `POST /api/auth/login` 정상 요청 → 200, `{token, user: {id, email, name, theme, language}}` 반환
+- [x] `POST /api/auth/login` 비밀번호 불일치 → 401 반환
+- [x] DB에 비밀번호가 해시로 저장되고 원문이 없다 (NFR-201)
 
 **의존성:**
 - [x] BE-02 완료
@@ -471,7 +471,7 @@ DB-01
 | DB-02: 스키마 적용 확인 | ✅ 완료 | 2026-05-28 |
 | BE-01: 백엔드 초기 설정 | ✅ 완료 | 2026-05-28 |
 | BE-02: DB 연결 및 공통 모듈 | ✅ 완료 | 2026-05-28 |
-| BE-03: 인증 API | ⬜ 미시작 | — |
+| BE-03: 인증 API | ✅ 완료 | 2026-05-28 |
 | BE-04: JWT 미들웨어 | ⬜ 미시작 | — |
 | BE-05: 사용자 API | ⬜ 미시작 | — |
 | BE-06: 카테고리 API | ⬜ 미시작 | — |
