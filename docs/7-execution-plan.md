@@ -167,16 +167,16 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** `GET /api/users/me`와 `PATCH /api/users/me` 엔드포인트를 구현한다.
 
 **완료 조건:**
-- [ ] `src/services/userService.js`: `getUserById()`, `updateUser()` 함수 구현
-  - [ ] updateUser: 이름, 비밀번호(해시), theme, language 수정 지원
-- [ ] `src/controllers/userController.js`: 입력 검증 → 서비스 호출 → JSON 응답
-- [ ] `src/routes/users.js`: `GET /me`, `PATCH /me` 라우팅 정의, authMiddleware 적용
+- [x] `src/services/userService.js`: `getUserById()`, `updateUser()` 함수 구현
+  - [x] updateUser: 이름, 비밀번호(해시), theme, language 수정 지원
+- [x] `src/controllers/userController.js`: 입력 검증 → 서비스 호출 → JSON 응답
+- [x] `src/routes/users.js`: `GET /me`, `PATCH /me` 라우팅 정의, authMiddleware 적용
 
 **동작 검증:**
-- [ ] `GET /api/users/me` → 200, `{id, email, name, theme, language, created_at}` 반환 (UC-204, UC-205)
-- [ ] `PATCH /api/users/me` 이름 변경 → 200, 변경된 사용자 정보 반환 (UC-201)
-- [ ] `PATCH /api/users/me` theme/language 변경 → 200, DB에 반영됨 (UC-203, UC-204)
-- [ ] 타인 계정의 `/me`에 접근 불가 (토큰 기반 본인 인증이므로 자동 보장) (UC-202)
+- [x] `GET /api/users/me` → 200, `{id, email, name, theme, language, created_at}` 반환 (UC-204, UC-205)
+- [x] `PATCH /api/users/me` 이름 변경 → 200, 변경된 사용자 정보 반환 (UC-201)
+- [x] `PATCH /api/users/me` theme/language 변경 → 200, DB에 반영됨 (UC-203, UC-204)
+- [x] 타인 계정의 `/me`에 접근 불가 (토큰 기반 본인 인증이므로 자동 보장) (UC-202)
 
 **의존성:**
 - [x] BE-04 완료
@@ -473,7 +473,7 @@ DB-01
 | BE-02: DB 연결 및 공통 모듈 | ✅ 완료 | 2026-05-28 |
 | BE-03: 인증 API | ✅ 완료 | 2026-05-28 |
 | BE-04: JWT 미들웨어 | ✅ 완료 | 2026-05-28 |
-| BE-05: 사용자 API | ⬜ 미시작 | — |
+| BE-05: 사용자 API | ✅ 완료 | 2026-05-28 |
 | BE-06: 카테고리 API | ⬜ 미시작 | — |
 | BE-07: 할일 API | ⬜ 미시작 | — |
 | FE-01: 프론트엔드 초기 설정 | ⬜ 미시작 | — |

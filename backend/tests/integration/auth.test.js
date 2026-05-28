@@ -5,9 +5,9 @@ const bcryptjs = require('bcryptjs');
 const app = require('../../src/app');
 const db = require('../../src/db/db');
 
-const TEST_EMAIL_PREFIX = 'test_';
-const SIGNUP_EMAIL = 'test_signup@example.com';
-const LOGIN_EMAIL = 'test_login@example.com';
+const TEST_EMAIL_PREFIX = 'test_auth_';
+const SIGNUP_EMAIL = 'test_auth_signup@example.com';
+const LOGIN_EMAIL = 'test_auth_login@example.com';
 const VALID_PASSWORD = 'Password1';
 
 async function cleanupTestUsers() {
@@ -167,7 +167,7 @@ describe('POST /api/auth/login', () => {
 
 // ---------------------------------------------------------------------------
 describe('비밀번호 보안 검증 (NFR-201)', () => {
-  const HASH_TEST_EMAIL = 'test_hashcheck@example.com';
+  const HASH_TEST_EMAIL = 'test_auth_hashcheck@example.com';
 
   // 1. DB에 저장된 비밀번호가 해시이고 원문과 다르다
   it('DB에 저장된 비밀번호가 bcrypt 해시이고 원문과 다르다', async () => {
