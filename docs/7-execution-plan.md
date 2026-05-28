@@ -100,16 +100,16 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** PostgreSQL 연결 풀을 설정하고, 공통 에러 클래스와 상수, 유틸리티 함수를 구현한다.
 
 **완료 조건:**
-- [ ] `src/db/db.js`: `pg.Pool`로 연결 풀 생성, `query()` 함수 export
-- [ ] `src/constants/httpStatus.js`: 200, 201, 400, 401, 403, 404, 409, 500 상수 정의
-- [ ] `src/constants/errorCodes.js`: `AUTH_REQUIRED`, `EMAIL_DUPLICATE`, `INVALID_CREDENTIALS`, `NOT_FOUND`, `FORBIDDEN`, `VALIDATION_ERROR`, `INTERNAL_ERROR` 정의
-- [ ] `src/constants/dbDefaults.js`: 기본 카테고리 ID(1) 상수 정의
-- [ ] `src/utils/errors.js`: `AppError` 커스텀 에러 클래스 구현 (status, message, code 포함)
-- [ ] `src/utils/validators.js`: 이메일 형식, 비밀번호 최소 길이 검증 함수 구현
-- [ ] `src/lib/passwordUtils.js`: `hashPassword()`, `comparePassword()` 함수 구현 (bcryptjs 사용)
-- [ ] `src/lib/jwt.js`: `signToken()`, `verifyToken()` 함수 구현 (jsonwebtoken 사용)
-- [ ] `src/middleware/errorHandler.js`: Express 에러 핸들러 미들웨어 구현 (AppError → JSON 응답)
-- [ ] `node -e "require('./src/db/db.js').query('SELECT 1')"` 실행이 성공한다
+- [x] `src/db/db.js`: `pg.Pool`로 연결 풀 생성, `query()` 함수 export
+- [x] `src/constants/httpStatus.js`: 200, 201, 400, 401, 403, 404, 409, 500 상수 정의
+- [x] `src/constants/errorCodes.js`: `AUTH_REQUIRED`, `EMAIL_DUPLICATE`, `INVALID_CREDENTIALS`, `NOT_FOUND`, `FORBIDDEN`, `VALIDATION_ERROR`, `INTERNAL_ERROR` 정의
+- [x] `src/constants/dbDefaults.js`: 기본 카테고리 ID(1) 상수 정의
+- [x] `src/utils/errors.js`: `AppError` 커스텀 에러 클래스 구현 (status, message, code 포함)
+- [x] `src/utils/validators.js`: 이메일 형식, 비밀번호 최소 길이 검증 함수 구현
+- [x] `src/lib/passwordUtils.js`: `hashPassword()`, `comparePassword()` 함수 구현 (bcryptjs 사용)
+- [x] `src/lib/jwt.js`: `signToken()`, `verifyToken()` 함수 구현 (jsonwebtoken 사용)
+- [x] `src/middleware/errorHandler.js`: Express 에러 핸들러 미들웨어 구현 (AppError → JSON 응답)
+- [x] `node -e "require('./src/db/db.js').query('SELECT 1')"` 실행이 성공한다
 
 **의존성:**
 - [x] BE-01 완료
@@ -470,7 +470,7 @@ DB-01
 | DB-01: DB 환경 구성 | ✅ 완료 | 2026-05-28 |
 | DB-02: 스키마 적용 확인 | ✅ 완료 | 2026-05-28 |
 | BE-01: 백엔드 초기 설정 | ✅ 완료 | 2026-05-28 |
-| BE-02: DB 연결 및 공통 모듈 | ⬜ 미시작 | — |
+| BE-02: DB 연결 및 공통 모듈 | ✅ 완료 | 2026-05-28 |
 | BE-03: 인증 API | ⬜ 미시작 | — |
 | BE-04: JWT 미들웨어 | ⬜ 미시작 | — |
 | BE-05: 사용자 API | ⬜ 미시작 | — |
