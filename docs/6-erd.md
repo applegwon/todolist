@@ -1,6 +1,6 @@
 # ERD (Entity-Relationship Diagram)
 
-**버전:** 1.0
+**버전:** 1.1
 **작성일:** 2026-05-27
 **작성자:** Naejune Gwon
 **참조 문서:** `docs/2-PRD.md` (제품 요구사항 정의서 v2.1)
@@ -12,6 +12,7 @@
 | 버전 | 날짜 | 변경자 | 변경 내용 |
 |------|------|--------|----------|
 | 1.0 | 2026-05-27 | Naejune Gwon | 최초 작성 |
+| 1.1 | 2026-05-28 | Naejune Gwon | start_date/end_date API 응답 직렬화 포맷 주석 추가, updated_at 명시적 갱신 방식 명기 |
 
 ---
 
@@ -94,13 +95,13 @@ erDiagram
 | id | SERIAL | PK, NOT NULL | 할일 고유 식별자. 자동 증가 정수 |
 | title | VARCHAR | NOT NULL | 할일 제목. 등록 시 필수 입력값 |
 | description | TEXT | NULL 허용 | 할일 상세 설명. 선택 입력값 |
-| start_date | DATE | NULL 허용 | 할일 시작 일자. 선택 입력값 |
-| end_date | DATE | NULL 허용 | 할일 종료 일자. 선택 입력값. start_date 이후여야 함 |
+| start_date | DATE | NULL 허용 | 할일 시작 일자. 선택 입력값. API 응답 시 ISO 8601 datetime 문자열(예: `2026-05-27T00:00:00.000Z`)로 직렬화됨 |
+| end_date | DATE | NULL 허용 | 할일 종료 일자. 선택 입력값. start_date 이후여야 함. API 응답 시 ISO 8601 datetime 문자열로 직렬화됨 |
 | status | VARCHAR | NOT NULL | 진행 상태. 허용값: `미시작`, `진행중`, `완료` |
 | category_id | INTEGER | FK → categories.id, NOT NULL | 소속 카테고리. 미지정 시 '기본' 카테고리 ID 자동 배정 |
 | user_id | INTEGER | FK → users.id, NOT NULL | 할일 소유 사용자 |
 | created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | 할일 생성 시각. 타임존 포함 |
-| updated_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | 할일 최종 수정 시각. 타임존 포함 |
+| updated_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | 할일 최종 수정 시각. 타임존 포함. PATCH API 호출 시 애플리케이션 레벨에서 `NOW()`로 명시적 갱신 |
 
 ---
 
