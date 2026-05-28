@@ -81,14 +81,14 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** `backend/` 디렉토리를 생성하고 Node.js 프로젝트와 필수 패키지를 설치한다.
 
 **완료 조건:**
-- [ ] `backend/` 디렉토리가 생성되었다
-- [ ] `npm init -y` 완료 후 `package.json`이 존재한다
-- [ ] 다음 패키지가 모두 설치되었다: `express`, `pg`, `bcryptjs`, `jsonwebtoken`, `dotenv`, `cors`
-- [ ] `devDependencies`에 `jest`, `supertest`, `eslint`, `prettier`가 설치되었다
-- [ ] `.env.example` 파일이 작성되었다 (DB, JWT, PORT, CORS 변수 포함)
-- [ ] `.env` 파일이 생성되었고 `.gitignore`에 등록되어 있다
-- [ ] `package.json`에 `dev`, `test`, `lint`, `format` 스크립트가 정의되었다
-- [ ] `docs/4-project-structure.md` 7절의 디렉토리 구조(`routes/`, `controllers/`, `services/`, `middleware/`, `db/`, `lib/`, `utils/`, `constants/`)가 생성되었다
+- [x] `backend/` 디렉토리가 생성되었다
+- [x] `npm init -y` 완료 후 `package.json`이 존재한다
+- [x] 다음 패키지가 모두 설치되었다: `express`, `pg`, `bcryptjs`, `jsonwebtoken`, `dotenv`, `cors`
+- [x] `devDependencies`에 `jest`, `supertest`, `eslint`, `prettier`가 설치되었다
+- [x] `.env.example` 파일이 작성되었다 (DB, JWT, PORT, CORS 변수 포함)
+- [x] `.env` 파일이 생성되었고 `.gitignore`에 등록되어 있다
+- [x] `package.json`에 `dev`, `test`, `lint`, `format` 스크립트가 정의되었다
+- [x] `docs/4-project-structure.md` 7절의 디렉토리 구조(`routes/`, `controllers/`, `services/`, `middleware/`, `db/`, `lib/`, `utils/`, `constants/`)가 생성되었다
 
 **의존성:**
 - [x] DB-01 완료
@@ -469,7 +469,7 @@ DB-01
 |--------|------|--------|
 | DB-01: DB 환경 구성 | ✅ 완료 | 2026-05-28 |
 | DB-02: 스키마 적용 확인 | ✅ 완료 | 2026-05-28 |
-| BE-01: 백엔드 초기 설정 | ⬜ 미시작 | — |
+| BE-01: 백엔드 초기 설정 | ✅ 완료 | 2026-05-28 |
 | BE-02: DB 연결 및 공통 모듈 | ⬜ 미시작 | — |
 | BE-03: 인증 API | ⬜ 미시작 | — |
 | BE-04: JWT 미들웨어 | ⬜ 미시작 | — |
