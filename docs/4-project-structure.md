@@ -1,7 +1,7 @@
 # TodoList 프로젝트 구조 설계 원칙
 
-**버전:** 1.2  
-**작성일:** 2026-05-27  
+**버전:** 1.3  
+**작성일:** 2026-05-28  
 **작성자:** Naejune Gwon  
 **참조 문서:**
 
@@ -18,6 +18,7 @@
 | 1.0  | 2026-05-27 | Naejune Gwon | 최초 작성 |
 | 1.1  | 2026-05-27 | Naejune Gwon | 프론트엔드 파일 확장자 `.jsx/.js` → `.tsx/.ts` 통일, Vite 템플릿 `react-ts` 수정, `types/` 디렉토리 필수 항목으로 변경 |
 | 1.2  | 2026-05-27 | Naejune Gwon | bcrypt → bcryptjs 표기 통일 (5.4, 7.1, 8.2절) |
+| 1.3  | 2026-05-28 | Naejune Gwon | 백엔드 Phase 2 완료 반영: 실제 구현 기준으로 디렉토리 구조 보정(lib/, middleware/, utils/ 실제 파일 반영), 테스트 파일 목록 업데이트, API 엔드포인트 체크리스트 완료 표시 |
 
 ---
 
@@ -683,8 +684,7 @@ backend/
 │   │
 │   ├── middleware/            # 미들웨어 (요청 전처리)
 │   │   ├── authMiddleware.js  # JWT 토큰 검증 및 req.user 주입
-│   │   ├── errorHandler.js    # 에러 처리 미들웨어
-│   │   └── requestLogger.js   # 요청 로깅 미들웨어 (선택사항)
+│   │   └── errorHandler.js    # 에러 처리 미들웨어
 │   │
 │   ├── db/                    # 데이터베이스 계층
 │   │   ├── db.js              # PostgreSQL 연결 관리 (pg 클라이언트)
@@ -695,13 +695,11 @@ backend/
 │   │
 │   ├── lib/                   # 공유 라이브러리 및 유틸리티
 │   │   ├── jwt.js             # JWT 서명/검증 함수
-│   │   ├── passwordUtils.js   # 비밀번호 해싱/검증 함수 (bcryptjs)
-│   │   ├── dateUtils.js       # 날짜 관련 헬퍼 (기한초과 판정)
-│   │   └── queryHelpers.js    # SQL 쿼리 헬퍼 (동적 쿼리 생성 등)
+│   │   └── passwordUtils.js   # 비밀번호 해싱/검증 함수 (bcryptjs)
 │   │
 │   ├── utils/                 # 유틸리티 함수 (비즈니스 로직 불포함)
 │   │   ├── validators.js      # 입력 검증 함수
-│   │   ├── formatters.js      # 응답 포맷팅 함수
+│   │   ├── logger.js          # 콘솔 로깅 유틸리티 (log 함수)
 │   │   └── errors.js          # 사용자 정의 에러 클래스
 │   │
 │   └── constants/             # 상수 정의
@@ -710,19 +708,19 @@ backend/
 │       └── dbDefaults.js      # DB 기본값 상수 (기본 카테고리 ID, 기본 언어 등)
 │
 ├── tests/                     # 테스트 코드
-│   ├── integration/           # 통합 테스트 (API 엔드포인트)
-│   │   ├── auth.test.js       # 인증 API 테스트
-│   │   ├── todos.test.js      # 할일 API 테스트
-│   │   └── categories.test.js # 카테고리 API 테스트
+│   ├── integration/           # 통합 테스트 (API 엔드포인트, 실제 DB 사용)
+│   │   ├── auth.test.js       # 인증 API 테스트 (13개)
+│   │   ├── users.test.js      # 사용자 API 테스트 (12개)
+│   │   ├── categories.test.js # 카테고리 API 테스트 (17개)
+│   │   └── todos.test.js      # 할일 API 테스트 (20개)
 │   │
-│   ├── unit/                  # 단위 테스트 (함수/로직)
-│   │   ├── authService.test.js
-│   │   ├── todoService.test.js
-│   │   └── utils.test.js
-│   │
-│   └── helpers/               # 테스트 헬퍼
-│       ├── testDb.js          # 테스트 DB 초기화
-│       └── testUtils.js       # 테스트 유틸리티
+│   └── unit/                  # 단위 테스트 (함수/로직)
+│       ├── setup.test.js      # DB 연결 확인
+│       ├── errors.test.js     # AppError 클래스 테스트
+│       ├── validators.test.js # 입력 검증 함수 테스트
+│       ├── passwordUtils.test.js # bcryptjs 해싱 테스트
+│       ├── jwt.test.js        # JWT 서명/검증 테스트
+│       └── authMiddleware.test.js # JWT 미들웨어 테스트 (8개)
 │
 ├── .env.example               # 환경변수 예시 파일
 ├── .eslintrc.json             # ESLint 설정
@@ -916,18 +914,18 @@ npm run dev
 
 ### C. API 엔드포인트 체크리스트
 
-- [ ] POST /api/auth/signup (회원가입)
-- [ ] POST /api/auth/login (로그인, JWT 발급)
-- [ ] GET /api/users/me (내 정보 조회)
-- [ ] PATCH /api/users/me (내 정보 수정, theme/language 포함)
-- [ ] GET /api/categories (내 카테고리 목록)
-- [ ] POST /api/categories (카테고리 생성)
-- [ ] PATCH /api/categories/:id (카테고리 수정)
-- [ ] DELETE /api/categories/:id (카테고리 삭제)
-- [ ] GET /api/todos (내 할일 목록, 필터링 포함)
-- [ ] POST /api/todos (할일 생성)
-- [ ] PATCH /api/todos/:id (할일 수정)
-- [ ] DELETE /api/todos/:id (할일 삭제)
+- [x] POST /api/auth/signup (회원가입)
+- [x] POST /api/auth/login (로그인, JWT 발급)
+- [x] GET /api/users/me (내 정보 조회)
+- [x] PATCH /api/users/me (내 정보 수정, theme/language 포함)
+- [x] GET /api/categories (내 카테고리 목록)
+- [x] POST /api/categories (카테고리 생성)
+- [x] PATCH /api/categories/:id (카테고리 수정)
+- [x] DELETE /api/categories/:id (카테고리 삭제)
+- [x] GET /api/todos (내 할일 목록, 필터링 포함)
+- [x] POST /api/todos (할일 생성)
+- [x] PATCH /api/todos/:id (할일 수정)
+- [x] DELETE /api/todos/:id (할일 삭제)
 
 ### D. 테스트 시나리오 체크리스트
 
