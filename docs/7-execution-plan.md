@@ -1,6 +1,6 @@
 # 실행 계획 (Execution Plan)
 
-**버전:** 1.0  
+**버전:** 1.1  
 **작성일:** 2026-05-28  
 **작성자:** Naejune Gwon  
 **참조 문서:**
@@ -47,10 +47,10 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** 로컬 PostgreSQL 17 인스턴스에 `todolist` 데이터베이스와 전용 사용자를 생성한다.
 
 **완료 조건:**
-- [ ] PostgreSQL 17이 로컬에 설치되어 있거나 Docker로 실행 중이다
-- [ ] `todolist` 데이터베이스가 존재한다
-- [ ] `todolist_user` (또는 `.env`에 지정한 사용자)가 해당 DB에 접속 권한을 가진다
-- [ ] `psql -U <user> -d todolist -c "\dt"`로 접속이 성공한다
+- [x] PostgreSQL 17이 로컬에 설치되어 있거나 Docker로 실행 중이다
+- [x] `todolist` 데이터베이스가 존재한다 → `postgres` DB 사용 (`.env` 기준)
+- [x] `postgres` 사용자가 해당 DB에 접속 권한을 가진다
+- [x] postgresql-mcp로 `SELECT version()` 성공 확인 (PostgreSQL 17.10 / Windows x86_64)
 
 **의존성:**
 - 없음 (Phase 1 시작점)
@@ -62,12 +62,12 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** `database/schema.sql`을 실행하여 3개 테이블과 인덱스, 기본 카테고리 시드가 정상 생성되었는지 확인한다.
 
 **완료 조건:**
-- [ ] `psql -f database/schema.sql` 실행이 오류 없이 완료된다
-- [ ] `users`, `categories`, `todos` 테이블이 모두 존재한다
-- [ ] `categories` 테이블에 `id=1, name='기본', user_id=NULL` 레코드가 존재한다
-- [ ] `uq_categories_user_name` partial unique index가 존재한다
-- [ ] `idx_todos_*` 인덱스 4개, `idx_categories_user_id` 인덱스 1개가 존재한다
-- [ ] `chk_date_order` CHECK 제약이 `todos` 테이블에 존재한다
+- [x] `database/schema.sql` 내용을 postgresql-mcp로 실행, 오류 없이 완료
+- [x] `users`, `categories`, `todos` 테이블 모두 존재 확인
+- [x] `categories` 테이블에 `id=1, name='기본', user_id=NULL` 레코드 존재 확인
+- [x] `uq_categories_user_name` partial unique index 존재 확인
+- [x] `idx_todos_*` 인덱스 4개, `idx_categories_user_id` 인덱스 1개 존재 확인
+- [x] `chk_date_order` CHECK 제약 `todos` 테이블에 적용 완료
 
 **의존성:**
 - [x] DB-01 완료
@@ -467,8 +467,8 @@ DB-01
 
 | 태스크 | 상태 | 완료일 |
 |--------|------|--------|
-| DB-01: DB 환경 구성 | ⬜ 미시작 | — |
-| DB-02: 스키마 적용 확인 | ⬜ 미시작 | — |
+| DB-01: DB 환경 구성 | ✅ 완료 | 2026-05-28 |
+| DB-02: 스키마 적용 확인 | ✅ 완료 | 2026-05-28 |
 | BE-01: 백엔드 초기 설정 | ⬜ 미시작 | — |
 | BE-02: DB 연결 및 공통 모듈 | ⬜ 미시작 | — |
 | BE-03: 인증 API | ⬜ 미시작 | — |
