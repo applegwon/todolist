@@ -148,13 +148,13 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** `authMiddleware.js`를 구현하고 보호된 라우트에 적용한다.
 
 **완료 조건:**
-- [ ] `src/middleware/authMiddleware.js`: `Authorization: Bearer <token>` 헤더 파싱 → JWT 검증 → `req.user = {id, email}` 주입
-- [ ] 토큰 없음 → 401, `{code: "AUTH_REQUIRED"}` 응답 (NFR-203)
-- [ ] 토큰 만료/위변조 → 401 응답
+- [x] `src/middleware/authMiddleware.js`: `Authorization: Bearer <token>` 헤더 파싱 → JWT 검증 → `req.user = {id, email}` 주입
+- [x] 토큰 없음 → 401, `{code: "AUTH_REQUIRED"}` 응답 (NFR-203)
+- [x] 토큰 만료/위변조 → 401 응답
 
 **동작 검증:**
-- [ ] 토큰 없이 `GET /api/users/me` 요청 → 401 반환
-- [ ] 유효한 토큰으로 `GET /api/users/me` 요청 → `req.user`가 올바르게 주입된다
+- [x] 토큰 없이 보호된 라우트 요청 → 401 반환
+- [x] 유효한 토큰으로 보호된 라우트 요청 → `req.user`가 올바르게 주입된다
 
 **의존성:**
 - [x] BE-02 완료
@@ -472,7 +472,7 @@ DB-01
 | BE-01: 백엔드 초기 설정 | ✅ 완료 | 2026-05-28 |
 | BE-02: DB 연결 및 공통 모듈 | ✅ 완료 | 2026-05-28 |
 | BE-03: 인증 API | ✅ 완료 | 2026-05-28 |
-| BE-04: JWT 미들웨어 | ⬜ 미시작 | — |
+| BE-04: JWT 미들웨어 | ✅ 완료 | 2026-05-28 |
 | BE-05: 사용자 API | ⬜ 미시작 | — |
 | BE-06: 카테고리 API | ⬜ 미시작 | — |
 | BE-07: 할일 API | ⬜ 미시작 | — |
