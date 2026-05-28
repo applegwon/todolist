@@ -216,23 +216,23 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** 할일 목록 조회(필터링 포함)/생성/수정/삭제 4개 엔드포인트를 구현한다.
 
 **완료 조건:**
-- [ ] `src/services/todoService.js` 구현:
-  - [ ] `getTodos(userId, filters)`: 카테고리/상태/기한초과 필터링, `is_overdue` 동적 계산 후 응답에 포함
-  - [ ] `createTodo(userId, data)`: 카테고리 미지정 시 기본 카테고리 자동 적용, 날짜 유효성 검증
-  - [ ] `updateTodo(userId, todoId, data)`: 소유권 확인, 날짜 유효성 검증 후 수정
-  - [ ] `deleteTodo(userId, todoId)`: 소유권 확인 후 삭제
-- [ ] `src/controllers/todoController.js`: 입력 검증 → 서비스 호출 → JSON 응답
-- [ ] `src/routes/todos.js`: 4개 라우트 정의, authMiddleware 적용
+- [x] `src/services/todoService.js` 구현:
+  - [x] `getTodos(userId, filters)`: 카테고리/상태/기한초과 필터링, `is_overdue` 동적 계산 후 응답에 포함
+  - [x] `createTodo(userId, data)`: 카테고리 미지정 시 기본 카테고리 자동 적용, 날짜 유효성 검증
+  - [x] `updateTodo(userId, todoId, data)`: 소유권 확인, 날짜 유효성 검증 후 수정
+  - [x] `deleteTodo(userId, todoId)`: 소유권 확인 후 삭제
+- [x] `src/controllers/todoController.js`: 입력 검증 → 서비스 호출 → JSON 응답
+- [x] `src/routes/todos.js`: 4개 라우트 정의, authMiddleware 적용
 
 **동작 검증:**
-- [ ] `GET /api/todos` → 200, `is_overdue` 필드가 포함된 목록 반환 (UC-404, UC-406)
-- [ ] `GET /api/todos?status=진행중` → 상태 필터 적용 (UC-405)
-- [ ] `GET /api/todos?category=2` → 카테고리 필터 적용 (UC-405)
-- [ ] `GET /api/todos?overdue=true` → 기한초과 항목만 반환 (UC-405, UC-406)
-- [ ] `POST /api/todos` 카테고리 미지정 → category_id가 기본 카테고리(1)로 저장 (UC-402)
-- [ ] `POST /api/todos` end_date < start_date → 400 반환 (UC-403)
-- [ ] `PATCH /api/todos/:id` 타인 소유 → 403 반환 (UC-408)
-- [ ] `DELETE /api/todos/:id` 본인 소유 → 204 반환 (UC-409)
+- [x] `GET /api/todos` → 200, `is_overdue` 필드가 포함된 목록 반환 (UC-404, UC-406)
+- [x] `GET /api/todos?status=진행중` → 상태 필터 적용 (UC-405)
+- [x] `GET /api/todos?category=2` → 카테고리 필터 적용 (UC-405)
+- [x] `GET /api/todos?overdue=true` → 기한초과 항목만 반환 (UC-405, UC-406)
+- [x] `POST /api/todos` 카테고리 미지정 → category_id가 기본 카테고리(1)로 저장 (UC-402)
+- [x] `POST /api/todos` end_date < start_date → 400 반환 (UC-403)
+- [x] `PATCH /api/todos/:id` 타인 소유 → 403 반환 (UC-408)
+- [x] `DELETE /api/todos/:id` 본인 소유 → 204 반환 (UC-409)
 
 **의존성:**
 - [x] BE-04 완료
@@ -475,7 +475,7 @@ DB-01
 | BE-04: JWT 미들웨어 | ✅ 완료 | 2026-05-28 |
 | BE-05: 사용자 API | ✅ 완료 | 2026-05-28 |
 | BE-06: 카테고리 API | ✅ 완료 | 2026-05-28 |
-| BE-07: 할일 API | ⬜ 미시작 | — |
+| BE-07: 할일 API | ✅ 완료 | 2026-05-28 |
 | FE-01: 프론트엔드 초기 설정 | ⬜ 미시작 | — |
 | FE-02: 공통 인프라 | ⬜ 미시작 | — |
 | FE-03: 인증 화면 | ⬜ 미시작 | — |
