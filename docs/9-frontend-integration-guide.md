@@ -19,6 +19,7 @@
 |------|--------|--------|----------|
 | 1.0 | 2026-05-28 | Naejune Gwon | 최초 작성 |
 | 1.1 | 2026-05-29 | Naejune Gwon | 일본어(ja) 언어 지원 추가 — TypeScript 타입, settingsStore, useLanguage 훅, PATCH 요청 바디 반영 |
+| 1.2 | 2026-05-29 | Naejune Gwon | BUG-01/BUG-02 수정 반영 — 401 조건부 처리(로그인 시도 401은 리다이렉트 금지), DATE 필드 반환 형식 수정("YYYY-MM-DD" 문자열), isoToDateInputValue 로직 수정 |
 
 ---
 
@@ -88,8 +89,8 @@ export interface Todo {
   id: number;
   title: string;
   description: string | null;
-  start_date: string | null; // ISO 8601 datetime (예: "2026-05-27T00:00:00.000Z")
-  end_date: string | null;   // ISO 8601 datetime
+  start_date: string | null; // "YYYY-MM-DD" 문자열 (예: "2026-05-27")
+  end_date: string | null;   // "YYYY-MM-DD" 문자열
   status: '미시작' | '진행중' | '완료';
   category_id: number;
   user_id: number;
@@ -195,8 +196,9 @@ async function request<T>(
   const data = await res.json();
 
   if (!res.ok) {
-    // 401: 토큰 만료 또는 미인증 → 로그아웃 처리
-    if (res.status === 401) {
+    // 401: 기존 토큰이 있을 때만 세션 만료로 간주 → 로그아웃 처리
+    // 토큰 없이 발생한 401(예: 로그인 실패)은 리다이렉트하지 않고 에러만 throw
+    if (res.status === 401 && token) {
       localStorage.removeItem('token');
       window.location.href = '/login';
     }
@@ -543,8 +545,8 @@ interface LoginRequest {
     "id": 2,
     "title": "거래처 계약서 검토",
     "description": "3건 검토 필요",
-    "start_date": "2026-05-20T00:00:00.000Z",
-    "end_date": "2026-05-22T00:00:00.000Z",
+    "start_date": "2026-05-20",
+    "end_date": "2026-05-22",
     "status": "미시작",
     "category_id": 1,
     "user_id": 1,
@@ -555,9 +557,9 @@ interface LoginRequest {
 ]
 ```
 
-> **날짜 형식 주의:** `start_date`, `end_date`는 DB에서 `DATE` 타입이지만,  
-> API 응답 시 pg 라이브러리에 의해 ISO 8601 datetime 문자열(`"2026-05-22T00:00:00.000Z"`)로 반환된다.  
-> 화면 표시 시 `new Date(todo.end_date).toLocaleDateString('ko-KR')` 등으로 가공해야 한다.
+> **날짜 형식:** `start_date`, `end_date`는 DB `DATE` 타입이며, API 응답도 `"YYYY-MM-DD"` 문자열로 반환된다.  
+> (`backend/src/db/db.js`에서 `pg` DATE OID 커스텀 파서로 처리)  
+> 화면 표시 시 `formatDateDisplay(todo.end_date)` 유틸 함수를 사용한다.
 
 ---
 
@@ -819,21 +821,26 @@ export function useLanguage() {
 ## 12. 날짜 유틸리티 (`src/utils/dateUtils.ts`)
 
 ```typescript
-// ISO datetime → "YYYY-MM-DD" 표시용 변환
-export function formatDateDisplay(isoString: string | null): string {
-  if (!isoString) return '—';
-  return new Date(isoString).toLocaleDateString('ko-KR', {
+// "YYYY-MM-DD" → 사용자 표시용 문자열 변환
+export function formatDateDisplay(dateString: string | null): string {
+  if (!dateString) return '—';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   });
 }
 
-// <input type="date"> 값 → API 전송용 그대로 사용 ("YYYY-MM-DD")
-// API 응답 날짜 → <input type="date"> 기본값으로 변환
+// API 응답 날짜("YYYY-MM-DD") → <input type="date"> 기본값으로 변환
+// 로컬 시간 메서드를 사용해 KST 환경에서의 UTC 직렬화 오프셋 오류 방지
 export function isoToDateInputValue(isoString: string | null): string {
   if (!isoString) return '';
-  return isoString.substring(0, 10); // "2026-05-27T00:00:00.000Z" → "2026-05-27"
+  const date = new Date(isoString);
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
 }
 ```
 
@@ -859,7 +866,8 @@ export function isoToDateInputValue(isoString: string | null): string {
 [인증된 사용자]
     │
     ├── 모든 API 요청에 Authorization: Bearer {token} 헤더 자동 포함
-    ├── 401 응답 시 → localStorage.removeItem('token') + navigate('/login')
+    ├── 401 응답 시 + 기존 토큰 있음(세션 만료) → localStorage.removeItem('token') + navigate('/login')
+    ├── 401 응답 시 + 토큰 없음(로그인 실패 등) → 에러만 throw, 리다이렉트 없음
     └── 로그아웃 버튼 → localStorage.removeItem('token') + navigate('/login')
 ```
 

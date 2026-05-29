@@ -20,6 +20,7 @@
 | 1.2  | 2026-05-27 | Naejune Gwon | bcrypt → bcryptjs 표기 통일 (5.4, 7.1, 8.2절) |
 | 1.3  | 2026-05-28 | Naejune Gwon | 백엔드 Phase 2 완료 반영: 실제 구현 기준으로 디렉토리 구조 보정(lib/, middleware/, utils/ 실제 파일 반영), 테스트 파일 목록 업데이트, API 엔드포인트 체크리스트 완료 표시 |
 | 1.4  | 2026-05-29 | Naejune Gwon | 일본어(ja) 언어 지원 추가 — i18n 디렉토리(ja.json), DB 컬럼 예시, LanguageSelector 주석, 도메인 엔티티 요약 반영 |
+| 1.5  | 2026-05-29 | Naejune Gwon | BUG-01/BUG-02 수정 반영 — db.js DATE 타입 파서 설명 추가, API 클라이언트 401 조건부 처리 설명 수정 |
 
 ---
 
@@ -689,7 +690,7 @@ backend/
 │   │   └── errorHandler.js    # 에러 처리 미들웨어
 │   │
 │   ├── db/                    # 데이터베이스 계층
-│   │   ├── db.js              # PostgreSQL 연결 관리 (pg 클라이언트)
+│   │   ├── db.js              # PostgreSQL 연결 관리 (pg 클라이언트, DATE OID 커스텀 파서)
 │   │   ├── migrations/        # DB 마이그레이션 스크립트 (선택사항)
 │   │   │   └── 001-init.sql   # 테이블 생성 스크립트
 │   │   └── seeds/             # 초기 데이터 (선택사항)

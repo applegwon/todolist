@@ -1,6 +1,10 @@
 require('dotenv').config();
 
-const { Pool } = require('pg');
+const { Pool, types } = require('pg');
+
+// DATE 컬럼(OID 1082)을 JS Date 객체 대신 "YYYY-MM-DD" 문자열로 반환
+// pg 기본 파서는 로컬 타임존으로 Date 객체를 생성해 UTC 직렬화 시 날짜가 밀림
+types.setTypeParser(1082, (val) => val);
 
 // DB 연결 관련 로깅 함수
 function logDbError(err) {

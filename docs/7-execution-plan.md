@@ -269,7 +269,7 @@ Phase 3: 프론트엔드 (Frontend)
 **API 클라이언트 (`src/lib/api.ts`)**
 - [x] `fetch` 기반 공통 API 클라이언트 구현
 - [x] `localStorage`에서 JWT 토큰을 읽어 `Authorization: Bearer` 헤더에 자동 주입
-- [x] 응답 401 시 로그아웃 처리(토큰 삭제 + 로그인 페이지 리다이렉트) 구현
+- [x] 응답 401 시 로그아웃 처리: 기존 토큰이 있을 때(세션 만료)만 토큰 삭제 + 로그인 페이지 리다이렉트, 토큰 없는 401(로그인 실패 등)은 에러 throw만 수행
 - [x] `get()`, `post()`, `patch()`, `del()` 함수 export
 
 **TanStack Query 클라이언트 (`src/lib/queryClient.ts`)**

@@ -2,6 +2,9 @@
 CLAUDE.local.md
 settings.local.json
 
+# Playwright MCP 임시 로그/스냅샷
+.playwright-mcp/
+
 # Logs
 logs
 *.log
