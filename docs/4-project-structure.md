@@ -1,12 +1,12 @@
 # TodoList 프로젝트 구조 설계 원칙
 
-**버전:** 1.3  
+**버전:** 1.4  
 **작성일:** 2026-05-28  
 **작성자:** Naejune Gwon  
 **참조 문서:**
 
 - `docs/1-domain-definition.md` (TodoList 도메인 정의서 v3.0)
-- `docs/2-PRD.md` (제품 요구사항 정의서 v2.1)
+- `docs/2-PRD.md` (제품 요구사항 정의서 v2.3)
 - `docs/3-user-scenario.md` (사용자 시나리오 v1.2)
 
 ---
@@ -19,6 +19,7 @@
 | 1.1  | 2026-05-27 | Naejune Gwon | 프론트엔드 파일 확장자 `.jsx/.js` → `.tsx/.ts` 통일, Vite 템플릿 `react-ts` 수정, `types/` 디렉토리 필수 항목으로 변경 |
 | 1.2  | 2026-05-27 | Naejune Gwon | bcrypt → bcryptjs 표기 통일 (5.4, 7.1, 8.2절) |
 | 1.3  | 2026-05-28 | Naejune Gwon | 백엔드 Phase 2 완료 반영: 실제 구현 기준으로 디렉토리 구조 보정(lib/, middleware/, utils/ 실제 파일 반영), 테스트 파일 목록 업데이트, API 엔드포인트 체크리스트 완료 표시 |
+| 1.4  | 2026-05-29 | Naejune Gwon | 일본어(ja) 언어 지원 추가 — i18n 디렉토리(ja.json), DB 컬럼 예시, LanguageSelector 주석, 도메인 엔티티 요약 반영 |
 
 ---
 
@@ -180,7 +181,7 @@ const { getCategoryById } = require("./categoryService.js");
 | 유틸리티 함수  | camelCase + `.ts`                     | `formatDate.ts`, `validateEmail.ts`    |
 | API 클라이언트 | camelCase + `Api` suffix + `.ts`      | `todoApi.ts`, `categoryApi.ts`         |
 | 스타일         | camelCase + `.css` 또는 `.module.css` | `todoList.css`, `todoForm.module.css`  |
-| i18n 리소스    | `[lang].json`                         | `ko.json`, `en.json`                   |
+| i18n 리소스    | `[lang].json`                         | `ko.json`, `en.json`, `ja.json`        |
 
 #### 백엔드
 
@@ -238,7 +239,7 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL, -- 암호화된 비밀번호 저장
   name VARCHAR(100) NOT NULL,
   theme VARCHAR(10) NOT NULL DEFAULT 'light', -- light 또는 dark
-  language VARCHAR(5) NOT NULL DEFAULT 'ko', -- ko 또는 en
+  language VARCHAR(5) NOT NULL DEFAULT 'ko', -- ko, en 또는 ja
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 )
 
@@ -538,7 +539,7 @@ frontend/
 │   │   │   ├── components/
 │   │   │   │   ├── ProfileForm.tsx      # 프로필 폼 (이름, 비밀번호)
 │   │   │   │   ├── ThemeSelector.tsx    # 테마 선택 컴포넌트 (light/dark)
-│   │   │   │   └── LanguageSelector.tsx # 언어 선택 컴포넌트 (ko/en)
+│   │   │   │   └── LanguageSelector.tsx # 언어 선택 컴포넌트 (ko/en/ja)
 │   │   │   ├── hooks/
 │   │   │   │   └── useProfile.ts        # 프로필 조회/수정 로직
 │   │   │   ├── api.ts                   # 사용자 API 호출 함수
@@ -603,7 +604,8 @@ frontend/
 │   │
 │   ├── i18n/                  # 다국어 리소스 (정적 파일)
 │   │   ├── ko.json            # 한국어 번역
-│   │   └── en.json            # 영어 번역
+│   │   ├── en.json            # 영어 번역
+│   │   └── ja.json            # 일본어 번역
 │   │
 │   ├── hooks/                 # 전역 커스텀 훅 (여러 도메인에 공유)
 │   │   ├── useLanguage.ts     # 언어 전환 로직 (i18n 연동)
@@ -899,7 +901,7 @@ npm run dev
 
 | 엔티티   | 주요 속성                                                                                          | 관련 BR    |
 | -------- | -------------------------------------------------------------------------------------------------- | ---------- |
-| User     | id, email, password, name, theme(light/dark), language(ko/en), created_at                          | BR-101~205 |
+| User     | id, email, password, name, theme(light/dark), language(ko/en/ja), created_at                       | BR-101~205 |
 | Category | id, name, user_id (NULL = 기본 카테고리)                                                           | BR-301~305 |
 | Todo     | id, title, description, start_date, end_date, status, category_id, user_id, created_at, updated_at | BR-401~403 |
 

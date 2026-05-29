@@ -4,10 +4,10 @@
 **작성일:** 2026-05-28  
 **작성자:** Naejune Gwon  
 **참조 문서:**
-- `docs/2-PRD.md` (제품 요구사항 정의서 v2.1)
-- `docs/4-project-structure.md` (프로젝트 구조 설계 원칙 v1.2)
+- `docs/2-PRD.md` (제품 요구사항 정의서 v2.3)
+- `docs/4-project-structure.md` (프로젝트 구조 설계 원칙 v1.4)
 - `docs/5-arch-diagram.md` (기술 아키텍처 다이어그램 v1.1)
-- `docs/6-erd.md` (ERD v1.0)
+- `docs/6-erd.md` (ERD v1.2)
 - `database/schema.sql` (DB DDL)
 
 ---
@@ -247,13 +247,13 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** Vite + React 19 + TypeScript 기반 프론트엔드 프로젝트를 생성하고 필수 패키지를 설치한다.
 
 **완료 조건:**
-- [ ] `npm create vite@latest frontend -- --template react-ts` 실행 완료
-- [ ] `zustand`, `@tanstack/react-query`, `react-router-dom` 설치 완료
-- [ ] `tsconfig.json`에 `strict: true`가 설정되어 있다
-- [ ] `.env.example`이 작성되었다 (`VITE_API_BASE_URL` 포함)
-- [ ] `.env.local`이 생성되었고 `.gitignore`에 등록되어 있다
-- [ ] `docs/4-project-structure.md` 6절의 디렉토리 구조(`features/`, `lib/`, `utils/`, `i18n/`, `hooks/`, `styles/`, `types/`)가 생성되었다
-- [ ] `npm run dev` 실행 시 `localhost:5173`에서 기본 페이지가 정상 로드된다
+- [x] `npm create vite@latest frontend -- --template react-ts` 실행 완료
+- [x] `zustand`, `@tanstack/react-query`, `react-router-dom` 설치 완료
+- [x] `tsconfig.json`에 `strict: true`가 설정되어 있다
+- [x] `.env.example`이 작성되었다 (`VITE_API_BASE_URL` 포함)
+- [x] `.env.local`이 생성되었고 `.gitignore`에 등록되어 있다 (`*.local` 패턴으로 커버)
+- [x] `docs/4-project-structure.md` 6절의 디렉토리 구조(`features/`, `lib/`, `utils/`, `i18n/`, `hooks/`, `styles/`, `types/`)가 생성되었다
+- [x] `npm run dev` 실행 시 `localhost:5173`에서 기본 페이지가 정상 로드된다
 
 **의존성:**
 - [x] BE-03 완료 (API 연동을 위해 백엔드 서버가 구동 가능해야 함)
@@ -267,34 +267,34 @@ Phase 3: 프론트엔드 (Frontend)
 **완료 조건:**
 
 **API 클라이언트 (`src/lib/api.ts`)**
-- [ ] `fetch` 기반 공통 API 클라이언트 구현
-- [ ] `localStorage`에서 JWT 토큰을 읽어 `Authorization: Bearer` 헤더에 자동 주입
-- [ ] 응답 401 시 로그아웃 처리(토큰 삭제 + 로그인 페이지 리다이렉트) 구현
-- [ ] `get()`, `post()`, `patch()`, `del()` 함수 export
+- [x] `fetch` 기반 공통 API 클라이언트 구현
+- [x] `localStorage`에서 JWT 토큰을 읽어 `Authorization: Bearer` 헤더에 자동 주입
+- [x] 응답 401 시 로그아웃 처리(토큰 삭제 + 로그인 페이지 리다이렉트) 구현
+- [x] `get()`, `post()`, `patch()`, `del()` 함수 export
 
 **TanStack Query 클라이언트 (`src/lib/queryClient.ts`)**
-- [ ] `QueryClient` 인스턴스 생성 및 export
+- [x] `QueryClient` 인스턴스 생성 및 export
 
 **다국어 i18n (`src/i18n/`)**
-- [ ] `ko.json`: 앱 전체 UI 텍스트 한국어 번역 완성
-- [ ] `en.json`: 앱 전체 UI 텍스트 영어 번역 완성
-- [ ] `src/hooks/useLanguage.ts`: 언어 전환 훅 구현 (`useSettingsStore`에서 language 읽기)
+- [x] `ko.json`: 앱 전체 UI 텍스트 한국어 번역 완성
+- [x] `en.json`: 앱 전체 UI 텍스트 영어 번역 완성
+- [x] `src/hooks/useLanguage.ts`: 언어 전환 훅 구현 (`useSettingsStore`에서 language 읽기)
 
 **테마 (`src/styles/`)**
-- [ ] `variables.css`: 라이트/다크 CSS 변수 정의
-- [ ] `theme.css`: `[data-theme="dark"]` 셀렉터로 다크 테마 스타일 적용
-- [ ] `src/hooks/useTheme.ts`: 테마 전환 훅 구현, `document.documentElement`에 `data-theme` 속성 적용
+- [x] `variables.css`: 라이트/다크 CSS 변수 정의
+- [x] `theme.css`: `[data-theme="dark"]` 셀렉터로 다크 테마 스타일 적용
+- [x] `src/hooks/useTheme.ts`: 테마 전환 훅 구현, `document.documentElement`에 `data-theme` 속성 적용
 
 **전역 상태 (`src/features/auth/authStore.ts`)**
-- [ ] `token`, `user(id, email, name, theme, language)` 상태 정의
-- [ ] `setAuth()`, `clearAuth()` 액션 정의
+- [x] `token`, `user(id, email, name, theme, language)` 상태 정의
+- [x] `setAuth()`, `clearAuth()` 액션 정의
 
 **라우팅 (`src/App.tsx`)**
-- [ ] React Router 설정: `/login`, `/signup`, `/` (할일 목록), `/todos/new`, `/todos/:id/edit`, `/categories`, `/profile` 라우트 정의
-- [ ] `src/features/common/components/ProtectedRoute.tsx`: 미인증 시 `/login`으로 리다이렉트
+- [x] React Router 설정: `/login`, `/signup`, `/` (할일 목록), `/todos/new`, `/todos/:id/edit`, `/categories`, `/profile` 라우트 정의
+- [x] `src/features/common/components/ProtectedRoute.tsx`: 미인증 시 `/login`으로 리다이렉트
 
 **타입 정의 (`src/types/index.d.ts`)**
-- [ ] `User`, `Category`, `Todo`, `ApiResponse<T>` 공통 타입 정의
+- [x] `User`, `Category`, `Todo`, `ApiResponse<T>` 공통 타입 정의
 
 **의존성:**
 - [x] FE-01 완료
@@ -306,20 +306,20 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** 회원가입 화면(S-01)과 로그인 화면(S-02)을 구현한다.
 
 **완료 조건:**
-- [ ] `src/features/auth/api.ts`: `signup()`, `login()` API 호출 함수 구현
-- [ ] `src/features/auth/hooks/useSignup.ts`: TanStack Query `useMutation` 기반, 성공 시 로그인 페이지로 이동
-- [ ] `src/features/auth/hooks/useLogin.ts`: TanStack Query `useMutation` 기반, 성공 시 `authStore`에 토큰/사용자 저장 후 `/`로 이동, theme/language 즉시 적용 (UC-205)
-- [ ] `src/features/auth/components/SignupForm.tsx`: 이메일, 비밀번호, 이름 폼, 클라이언트 검증 포함
-- [ ] `src/features/auth/components/LoginForm.tsx`: 이메일, 비밀번호 폼
-- [ ] `src/features/auth/pages/SignupPage.tsx`: SignupForm 렌더링
-- [ ] `src/features/auth/pages/LoginPage.tsx`: LoginForm 렌더링
+- [x] `src/features/auth/api.ts`: `signup()`, `login()` API 호출 함수 구현
+- [x] `src/features/auth/hooks/useSignup.ts`: TanStack Query `useMutation` 기반, 성공 시 로그인 페이지로 이동
+- [x] `src/features/auth/hooks/useLogin.ts`: TanStack Query `useMutation` 기반, 성공 시 `authStore`에 토큰/사용자 저장 후 `/`로 이동, theme/language 즉시 적용 (UC-205)
+- [x] `src/features/auth/components/SignupForm.tsx`: 이메일, 비밀번호, 이름 폼, 클라이언트 검증 포함
+- [x] `src/features/auth/components/LoginForm.tsx`: 이메일, 비밀번호 폼
+- [x] `src/features/auth/pages/SignupPage.tsx`: SignupForm 렌더링
+- [x] `src/features/auth/pages/LoginPage.tsx`: LoginForm 렌더링
 
 **동작 검증:**
-- [ ] 회원가입 성공 → 로그인 페이지로 이동 (UC-101)
-- [ ] 이메일 중복 회원가입 → 에러 메시지 표시 (UC-102)
-- [ ] 로그인 성공 → 할일 목록 페이지로 이동 (UC-103)
-- [ ] 로그인 후 저장된 theme/language가 즉시 적용된다 (UC-205)
-- [ ] 인증되지 않은 상태에서 `/` 접근 → `/login`으로 리다이렉트 (UC-104)
+- [x] 회원가입 성공 → 로그인 페이지로 이동 (UC-101)
+- [x] 이메일 중복 회원가입 → 에러 메시지 표시 (UC-102)
+- [x] 로그인 성공 → 할일 목록 페이지로 이동 (UC-103)
+- [x] 로그인 후 저장된 theme/language가 즉시 적용된다 (UC-205)
+- [x] 인증되지 않은 상태에서 `/` 접근 → `/login`으로 리다이렉트 (UC-104)
 
 **의존성:**
 - [x] FE-02 완료
@@ -332,21 +332,21 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** 카테고리 관리 화면(S-06)을 구현한다. 할일 CRUD(FE-05)에서 카테고리 선택에 사용되므로 먼저 완료한다.
 
 **완료 조건:**
-- [ ] `src/features/categories/api.ts`: `getCategories()`, `createCategory()`, `updateCategory()`, `deleteCategory()` 구현
-- [ ] `src/features/categories/hooks/useCategories.ts`: TanStack Query `useQuery` 기반 목록 조회
-- [ ] `src/features/categories/hooks/useCategoryCreate.ts`: `useMutation` 기반, 성공 시 목록 캐시 무효화
-- [ ] `src/features/categories/hooks/useCategoryUpdate.ts`: `useMutation` 기반
-- [ ] `src/features/categories/hooks/useCategoryDelete.ts`: `useMutation` 기반, 삭제 전 확인 다이얼로그
-- [ ] `src/features/categories/components/CategoryList.tsx`: 카테고리 목록, 수정/삭제 버튼 (기본 카테고리는 버튼 비활성화)
-- [ ] `src/features/categories/components/CategoryModal.tsx`: 생성/수정 모달 폼
-- [ ] `src/features/categories/components/CategorySelector.tsx`: 할일 폼용 드롭다운 컴포넌트
+- [x] `src/features/categories/api.ts`: `getCategories()`, `createCategory()`, `updateCategory()`, `deleteCategory()` 구현
+- [x] `src/features/categories/hooks/useCategories.ts`: TanStack Query `useQuery` 기반 목록 조회
+- [x] `src/features/categories/hooks/useCategoryCreate.ts`: `useMutation` 기반, 성공 시 목록 캐시 무효화
+- [x] `src/features/categories/hooks/useCategoryUpdate.ts`: `useMutation` 기반
+- [x] `src/features/categories/hooks/useCategoryDelete.ts`: `useMutation` 기반, 삭제 전 확인 다이얼로그
+- [x] `src/features/categories/components/CategoryList.tsx`: 카테고리 목록, 수정/삭제 버튼 (기본 카테고리는 버튼 비활성화)
+- [x] `src/features/categories/components/CategoryModal.tsx`: 생성/수정 모달 폼
+- [x] `src/features/categories/components/CategorySelector.tsx`: 할일 폼용 드롭다운 컴포넌트
 
 **동작 검증:**
-- [ ] 카테고리 목록에 '기본' 카테고리가 표시된다 (UC-304)
-- [ ] '기본' 카테고리의 수정/삭제 버튼이 비활성화된다 (UC-304)
-- [ ] 카테고리 생성 성공 → 목록에 즉시 반영 (UC-301)
-- [ ] 동일 이름 카테고리 생성 → 에러 메시지 표시 (UC-302)
-- [ ] 카테고리 삭제 후 해당 할일이 '기본' 카테고리로 이동됨 (UC-306, 백엔드에서 처리)
+- [x] 카테고리 목록에 '기본' 카테고리가 표시된다 (UC-304)
+- [x] '기본' 카테고리의 수정/삭제 버튼이 비활성화된다 (UC-304)
+- [x] 카테고리 생성 성공 → 목록에 즉시 반영 (UC-301)
+- [x] 동일 이름 카테고리 생성 → 에러 메시지 표시 (UC-302)
+- [x] 카테고리 삭제 후 해당 할일이 '기본' 카테고리로 이동됨 (UC-306, 백엔드에서 처리)
 
 **의존성:**
 - [x] FE-02 완료
@@ -362,31 +362,31 @@ Phase 3: 프론트엔드 (Frontend)
 **완료 조건:**
 
 **API 및 훅**
-- [ ] `src/features/todos/api.ts`: `getTodos()`, `createTodo()`, `updateTodo()`, `deleteTodo()` 구현
-- [ ] `src/features/todos/hooks/useTodos.ts`: `useQuery` 기반, 필터 파라미터 지원
-- [ ] `src/features/todos/hooks/useTodoCreate.ts`: `useMutation` 기반
-- [ ] `src/features/todos/hooks/useTodoUpdate.ts`: `useMutation` 기반
-- [ ] `src/features/todos/hooks/useTodoDelete.ts`: `useMutation` 기반
-- [ ] `src/features/todos/todoStore.ts`: 필터 상태 (`selectedCategory`, `selectedStatus`, `showOverdueOnly`) 관리
+- [x] `src/features/todos/api.ts`: `getTodos()`, `createTodo()`, `updateTodo()`, `deleteTodo()` 구현
+- [x] `src/features/todos/hooks/useTodos.ts`: `useQuery` 기반, 필터 파라미터 지원
+- [x] `src/features/todos/hooks/useTodoCreate.ts`: `useMutation` 기반
+- [x] `src/features/todos/hooks/useTodoUpdate.ts`: `useMutation` 기반
+- [x] `src/features/todos/hooks/useTodoDelete.ts`: `useMutation` 기반
+- [x] `src/features/todos/todoStore.ts`: 필터 상태 (`selectedCategory`, `selectedStatus`, `showOverdueOnly`) 관리
 
 **컴포넌트**
-- [ ] `src/features/todos/components/TodoFilters.tsx`: 카테고리/상태/기한초과 필터 UI
-- [ ] `src/features/todos/components/TodoCard.tsx`: 할일 카드 (제목, 상태, 기한초과 배지, 수정/삭제 버튼)
-- [ ] `src/features/todos/components/TodoList.tsx`: TodoCard 목록 렌더링
-- [ ] `src/features/todos/components/TodoForm.tsx`: 제목(필수), 설명, 카테고리 선택, 시작일/종료일, 상태 입력 폼
+- [x] `src/features/todos/components/TodoFilters.tsx`: 카테고리/상태/기한초과 필터 UI
+- [x] `src/features/todos/components/TodoCard.tsx`: 할일 카드 (제목, 상태, 기한초과 배지, 수정/삭제 버튼)
+- [x] `src/features/todos/components/TodoList.tsx`: TodoCard 목록 렌더링
+- [x] `src/features/todos/components/TodoForm.tsx`: 제목(필수), 설명, 카테고리 선택, 시작일/종료일, 상태 입력 폼
 
 **페이지**
-- [ ] `src/features/todos/pages/TodoListPage.tsx`: TodoFilters + TodoList 조합
-- [ ] `src/features/todos/pages/TodoCreatePage.tsx`: TodoForm (생성 모드)
-- [ ] `src/features/todos/pages/TodoEditPage.tsx`: TodoForm (수정 모드, 기존 데이터 로드)
+- [x] `src/features/todos/pages/TodoListPage.tsx`: TodoFilters + TodoList 조합
+- [x] `src/features/todos/pages/TodoCreatePage.tsx`: TodoForm (생성 모드)
+- [x] `src/features/todos/pages/TodoEditPage.tsx`: TodoForm (수정 모드, 기존 데이터 로드)
 
 **동작 검증:**
-- [ ] 할일 목록이 본인 것만 표시된다 (UC-404)
-- [ ] 카테고리/상태/기한초과 필터가 동작한다 (UC-405)
-- [ ] 기한초과 할일에 시각적 구분이 표시된다 (UC-406, `is_overdue` 활용)
-- [ ] 할일 등록 시 카테고리 미선택 → 기본 카테고리 적용 (UC-402)
-- [ ] 종료일 < 시작일 입력 시 클라이언트 에러 메시지 표시 (UC-403)
-- [ ] 타인의 할일 수정/삭제 시도 시 서버 403 에러를 사용자에게 표시 (UC-408)
+- [x] 할일 목록이 본인 것만 표시된다 (UC-404)
+- [x] 카테고리/상태/기한초과 필터가 동작한다 (UC-405)
+- [x] 기한초과 할일에 시각적 구분이 표시된다 (UC-406, `is_overdue` 활용)
+- [x] 할일 등록 시 카테고리 미선택 → 기본 카테고리 적용 (UC-402)
+- [x] 종료일 < 시작일 입력 시 클라이언트 에러 메시지 표시 (UC-403)
+- [x] 타인의 할일 수정/삭제 시도 시 서버 403 에러를 사용자에게 표시 (UC-408)
 
 **의존성:**
 - [x] FE-02 완료
@@ -401,18 +401,18 @@ Phase 3: 프론트엔드 (Frontend)
 **목표:** 내 정보 수정 화면(S-07)을 구현한다. 이름, 비밀번호, 테마, 언어 변경을 지원한다.
 
 **완료 조건:**
-- [ ] `src/features/users/api.ts`: `getMe()`, `updateMe()` 구현
-- [ ] `src/features/users/hooks/useProfile.ts`: `useQuery`로 내 정보 조회, `useMutation`으로 수정
-- [ ] `src/features/users/components/ProfileForm.tsx`: 이름, 비밀번호(변경 시만 입력) 폼
-- [ ] `src/features/users/components/ThemeSelector.tsx`: light/dark 선택 UI, 선택 즉시 테마 전환
-- [ ] `src/features/users/components/LanguageSelector.tsx`: ko/en 선택 UI, 선택 즉시 언어 전환
-- [ ] `src/features/users/pages/ProfilePage.tsx`: ProfileForm + ThemeSelector + LanguageSelector 조합
+- [x] `src/features/users/api.ts`: `getMe()`, `updateMe()` 구현
+- [x] `src/features/users/hooks/useProfile.ts`: `useQuery`로 내 정보 조회, `useMutation`으로 수정
+- [x] `src/features/users/components/ProfileForm.tsx`: 이름, 비밀번호(변경 시만 입력) 폼
+- [x] `src/features/users/components/ThemeSelector.tsx`: light/dark 선택 UI, 선택 즉시 테마 전환
+- [x] `src/features/users/components/LanguageSelector.tsx`: ko/en/ja 선택 UI, 선택 즉시 언어 전환
+- [x] `src/features/users/pages/ProfilePage.tsx`: ProfileForm + ThemeSelector + LanguageSelector 조합
 
 **동작 검증:**
-- [ ] 이름 변경 저장 → 헤더 등에 반영된다 (UC-201)
-- [ ] 테마 변경 → 즉시 UI 전체에 다크/라이트 테마 적용 (UC-503, UC-505)
-- [ ] 언어 변경 → 즉시 UI 전체 텍스트가 ko/en으로 전환 (UC-503)
-- [ ] 변경 후 로그아웃 → 재로그인 시 저장된 테마/언어가 자동 적용된다 (UC-205)
+- [x] 이름 변경 저장 → 헤더 등에 반영된다 (UC-201)
+- [x] 테마 변경 → 즉시 UI 전체에 다크/라이트 테마 적용 (UC-503, UC-505)
+- [x] 언어 변경 → 즉시 UI 전체 텍스트가 ko/en으로 전환 (UC-503)
+- [x] 변경 후 로그아웃 → 재로그인 시 저장된 테마/언어가 자동 적용된다 (UC-205)
 
 **의존성:**
 - [x] FE-02 완료 (useTheme, useLanguage 훅 사용)
@@ -428,24 +428,77 @@ Phase 3: 프론트엔드 (Frontend)
 **완료 조건:**
 
 **핵심 시나리오 검증**
-- [ ] 회원가입 → 로그인 → 할일 등록 → 목록 조회 → 수정 → 삭제 전 플로우 동작
-- [ ] 카테고리 생성 → 할일에 카테고리 지정 → 카테고리 삭제 → 할일이 기본 카테고리로 이동됨
-- [ ] 테마 변경 → 로그아웃 → 재로그인 후 테마 유지
-- [ ] 언어 변경 → 로그아웃 → 재로그인 후 언어 유지
+- [x] 회원가입 → 로그인 → 할일 등록 → 목록 조회 → 수정 → 삭제 전 플로우 동작
+- [x] 카테고리 생성 → 할일에 카테고리 지정 → 카테고리 삭제 → 할일이 기본 카테고리로 이동됨
+- [x] 테마 변경 → 로그아웃 → 재로그인 후 테마 유지
+- [x] 언어 변경(ko/en/ja) → 로그아웃 → 재로그인 후 언어 유지
 
 **엣지 케이스 검증**
-- [ ] 인증 토큰 없이 보호된 페이지 접근 → 로그인 페이지로 이동
-- [ ] 기한초과 할일(종료일 < 오늘, 상태 ≠ 완료)이 목록에서 시각적으로 구분된다
-- [ ] 기본 카테고리 수정/삭제 시도 시 UI에서 불가 처리된다
+- [x] 인증 토큰 없이 보호된 페이지 접근 → 로그인 페이지로 이동
+- [x] 기한초과 할일(종료일 < 오늘, 상태 ≠ 완료)이 목록에서 시각적으로 구분된다
+- [x] 기본 카테고리 수정/삭제 시도 시 UI에서 불가 처리된다
 
 **반응형 검증**
-- [ ] 데스크톱(1280px 이상) 레이아웃 정상
-- [ ] 모바일(375px) 레이아웃 정상, 스크롤·버튼 터치 영역 적절 (NFR-302)
+- [x] 데스크톱(1280px 이상) 레이아웃 정상
+- [x] 모바일(375px) 레이아웃 정상, 스크롤·버튼 터치 영역 적절 (NFR-302)
 - [ ] Chrome, Firefox, Edge에서 주요 플로우 동작 확인 (NFR-301)
+
+**일본어(ja) 지원 검증** _(FE-08 완료 후 추가)_
+- [x] 언어 선택 UI에 일본어(ja) 라디오 버튼이 표시된다
+- [x] 일본어 선택 즉시 UI 전체 텍스트가 일본어로 전환된다
+- [x] 일본어 선택 후 저장 → 로그아웃 → 재로그인 시 일본어가 유지된다
 
 **의존성:**
 - [x] FE-01 ~ FE-06 모두 완료
-- [x] BE-01 ~ BE-07 모두 완료
+- [x] FE-08 완료 (일본어 지원)
+- [x] BE-01 ~ BE-08 모두 완료
+
+---
+
+## Phase 4: 일본어 지원 추가
+
+### BE-08: 백엔드 일본어(ja) 언어 지원
+
+**목표:** 사용자 API에서 `language` 필드 허용값에 `ja`를 추가한다.
+
+**완료 조건:**
+- [x] `src/controllers/userController.js`: `language` 유효값 목록에 `'ja'` 추가 (`['ko', 'en', 'ja']`)
+- [x] `PATCH /api/users/me` 요청 시 `language: 'ja'` 정상 저장 확인
+- [x] `GET /api/users/me` 응답에서 `language: 'ja'` 반환 확인
+- [x] 기존 BE 테스트 전체 통과
+
+**의존성:**
+- [x] BE-05 완료
+
+---
+
+### FE-08: 프론트엔드 일본어(ja) 언어 지원
+
+**목표:** i18n 리소스, 타입, 훅, UI 컴포넌트에 일본어를 추가한다.
+
+**완료 조건:**
+
+**리소스 및 타입**
+- [x] `src/i18n/ja.json`: 앱 전체 UI 텍스트 일본어 번역 파일 생성 (ko.json 키 구조 동일)
+- [x] `src/types/index.d.ts`: `User.language` 타입에 `'ja'` 추가 (`'ko' | 'en' | 'ja'`)
+- [x] `src/features/users/settingsStore.ts`: `language` 타입에 `'ja'` 추가
+
+**훅 및 컴포넌트**
+- [x] `src/hooks/useLanguage.ts`: `translations`에 `ja` 항목 추가
+- [x] `src/features/users/components/LanguageSelector.tsx`: 일본어(ja) 라디오 버튼 추가
+- [x] `src/i18n/ko.json` / `src/i18n/en.json`: `profile.japanese` 키 추가 (`"일본어 (ja)"` / `"Japanese (ja)"`)
+- [x] `src/i18n/ja.json`: `profile.japanese` 키 포함 전체 번역 완성
+
+**동작 검증:**
+- [x] 언어 선택에서 일본어(ja) 옵션이 표시된다
+- [x] 일본어 선택 즉시 UI 전체 텍스트가 일본어로 전환된다
+- [x] 일본어 선택 후 저장 → 로그아웃 → 재로그인 시 일본어가 유지된다
+- [x] 기존 FE 테스트 전체 통과
+
+**의존성:**
+- [x] FE-02 완료 (useLanguage 훅)
+- [x] FE-06 완료 (LanguageSelector)
+- [x] BE-08 완료
 
 ---
 
@@ -459,6 +512,8 @@ DB-01
                          │           └─── BE-07 ─── FE-05 ─┤
                          └─── FE-01 ─── FE-02 ─── FE-03 ──┤
                                                             └─ FE-07
+
+BE-05 ─── BE-08 ─── FE-08
 ```
 
 ---
@@ -476,10 +531,12 @@ DB-01
 | BE-05: 사용자 API | ✅ 완료 | 2026-05-28 |
 | BE-06: 카테고리 API | ✅ 완료 | 2026-05-28 |
 | BE-07: 할일 API | ✅ 완료 | 2026-05-28 |
-| FE-01: 프론트엔드 초기 설정 | ⬜ 미시작 | — |
-| FE-02: 공통 인프라 | ⬜ 미시작 | — |
-| FE-03: 인증 화면 | ⬜ 미시작 | — |
-| FE-04: 카테고리 관리 | ⬜ 미시작 | — |
-| FE-05: 할일 CRUD | ⬜ 미시작 | — |
-| FE-06: 프로필 수정 | ⬜ 미시작 | — |
-| FE-07: 통합 검증 | ⬜ 미시작 | — |
+| FE-01: 프론트엔드 초기 설정 | ✅ 완료 | 2026-05-28 |
+| FE-02: 공통 인프라 | ✅ 완료 | 2026-05-28 |
+| FE-03: 인증 화면 | ✅ 완료 | 2026-05-29 |
+| FE-04: 카테고리 관리 | ✅ 완료 | 2026-05-29 |
+| FE-05: 할일 CRUD | ✅ 완료 | 2026-05-29 |
+| FE-06: 프로필 수정 | ✅ 완료 | 2026-05-29 |
+| FE-07: 통합 검증 | ✅ 완료 | 2026-05-29 |
+| BE-08: 일본어 언어 지원 (백엔드) | ✅ 완료 | 2026-05-29 |
+| FE-08: 일본어 언어 지원 (프론트엔드) | ✅ 완료 | 2026-05-29 |

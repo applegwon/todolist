@@ -1,9 +1,9 @@
 # ERD (Entity-Relationship Diagram)
 
-**버전:** 1.1
+**버전:** 1.2
 **작성일:** 2026-05-27
 **작성자:** Naejune Gwon
-**참조 문서:** `docs/2-PRD.md` (제품 요구사항 정의서 v2.1)
+**참조 문서:** `docs/2-PRD.md` (제품 요구사항 정의서 v2.3)
 
 ---
 
@@ -13,6 +13,7 @@
 |------|------|--------|----------|
 | 1.0 | 2026-05-27 | Naejune Gwon | 최초 작성 |
 | 1.1 | 2026-05-28 | Naejune Gwon | start_date/end_date API 응답 직렬화 포맷 주석 추가, updated_at 명시적 갱신 방식 명기 |
+| 1.2 | 2026-05-29 | Naejune Gwon | 일본어(ja) 언어 지원 추가 — ERD 다이어그램 주석 및 users 테이블 language 허용값 업데이트 |
 
 ---
 
@@ -28,7 +29,7 @@ erDiagram
         varchar password "해시 암호화된 비밀번호 (NOT NULL)"
         varchar name "사용자 이름 (NOT NULL)"
         varchar theme "UI 테마 light/dark (NOT NULL, DEFAULT 'light')"
-        varchar language "UI 언어 ko/en (NOT NULL, DEFAULT 'ko')"
+        varchar language "UI 언어 ko/en/ja (NOT NULL, DEFAULT 'ko')"
         timestamptz created_at "계정 생성 시각 (NOT NULL, DEFAULT now())"
     }
 
@@ -71,7 +72,7 @@ erDiagram
 | password | VARCHAR | NOT NULL | bcrypt 등으로 단방향 해시한 비밀번호. 원문 저장 금지 |
 | name | VARCHAR | NOT NULL | 화면에 표시되는 사용자 이름 |
 | theme | VARCHAR | NOT NULL, DEFAULT 'light' | UI 테마 설정. 허용값: `light`, `dark` |
-| language | VARCHAR | NOT NULL, DEFAULT 'ko' | UI 언어 설정. 허용값: `ko`, `en` |
+| language | VARCHAR | NOT NULL, DEFAULT 'ko' | UI 언어 설정. 허용값: `ko`, `en`, `ja` |
 | created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | 계정 생성 시각. 타임존 포함 |
 
 ### 2.2 categories 테이블
