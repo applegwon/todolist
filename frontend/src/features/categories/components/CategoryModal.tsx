@@ -19,7 +19,7 @@ export function CategoryModal({ mode, category, onClose }: Props) {
 
   const activeMutation = mode === 'create' ? createMutation : updateMutation;
   const isPending = activeMutation.isPending;
-  const error = activeMutation.isError ? (activeMutation.error as ApiError) : null;
+  const error = activeMutation.isError ? (activeMutation.error as unknown as ApiError) : null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
