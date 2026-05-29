@@ -28,7 +28,7 @@ CREATE TABLE users (
     theme       VARCHAR(10)     NOT NULL DEFAULT 'light'
                     CHECK (theme IN ('light', 'dark')),        -- BR-203: 허용값 light/dark
     language    VARCHAR(5)      NOT NULL DEFAULT 'ko'
-                    CHECK (language IN ('ko', 'en')),          -- BR-204: 허용값 ko/en
+                    CHECK (language IN ('ko', 'en', 'ja')),    -- BR-204: 허용값 ko/en/ja
     created_at  TIMESTAMPTZ     NOT NULL DEFAULT now()
 );
 
@@ -36,7 +36,7 @@ COMMENT ON TABLE  users            IS '사용자 계정 및 개인 설정';
 COMMENT ON COLUMN users.email      IS '로그인용 이메일 (중복 불가)';
 COMMENT ON COLUMN users.password   IS 'bcryptjs 단방향 해시된 비밀번호';
 COMMENT ON COLUMN users.theme      IS 'UI 테마 설정 (light/dark), 로그인 시 자동 적용';
-COMMENT ON COLUMN users.language   IS 'UI 언어 설정 (ko/en), 로그인 시 자동 적용';
+COMMENT ON COLUMN users.language   IS 'UI 언어 설정 (ko/en/ja), 로그인 시 자동 적용';
 
 
 -- -------------------------------------------------------------

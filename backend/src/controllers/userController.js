@@ -5,7 +5,7 @@ const { validatePassword } = require('../utils/validators');
 const { log } = require('../utils/logger');
 
 const VALID_THEMES = ['light', 'dark'];
-const VALID_LANGUAGES = ['ko', 'en'];
+const VALID_LANGUAGES = ['ko', 'en', 'ja'];
 
 async function getMe(req, res, next) {
   try {
@@ -30,7 +30,7 @@ async function updateMe(req, res, next) {
     }
 
     if (language !== undefined && !VALID_LANGUAGES.includes(language)) {
-      throw new AppError('language는 ko 또는 en이어야 합니다', 400, errorCodes.INVALID_FORMAT);
+      throw new AppError('language는 ko, en 또는 ja이어야 합니다', 400, errorCodes.INVALID_FORMAT);
     }
 
     const user = await userService.updateUser(req.user.id, { name, password, theme, language });

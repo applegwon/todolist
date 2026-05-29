@@ -169,6 +169,32 @@ describe('PATCH /api/users/me', () => {
     expect(res.status).toBe(400);
   });
 
+  // 13. language 변경 (ja) → 200, language: 'ja' 반환
+  it("language 변경 (ja) → 200, language: 'ja' 반환", async () => {
+    const res = await request(app)
+      .patch('/api/users/me')
+      .set(authHeader(token))
+      .send({ language: 'ja' });
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('language', 'ja');
+  });
+
+  // 14. language ja 저장 후 GET /me 에서 ja 반환
+  it("language ja 저장 후 GET /me 에서 ja 반환", async () => {
+    await request(app)
+      .patch('/api/users/me')
+      .set(authHeader(token))
+      .send({ language: 'ja' });
+
+    const res = await request(app)
+      .get('/api/users/me')
+      .set(authHeader(token));
+
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('language', 'ja');
+  });
+
   // 12. 약한 비밀번호 (8자 미만) → 400
   it('약한 비밀번호 (8자 미만) → 400', async () => {
     const res = await request(app)
